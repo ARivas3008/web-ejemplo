@@ -1,0 +1,70 @@
+<a class="skip-link" href="#main-content">{{ 'skip-content' | translate }}</a>
+<header>
+  <p-toolbar>
+    <ng-template #start
+      ><div class="flex align-items-center gap-3">
+        @if (config.sidebar) {
+          <p-button
+            icon="pi pi-bars"
+            [text]="true"
+            [ariaLabel]="'toggle-menu' | translate"
+            (onClick)="menuOpen.set(!menuOpen())"
+          />
+        }
+        @if (logoUrl && !logoFailed()) {
+          <img
+            [src]="logoUrl"
+            [alt]="config.brand"
+            width="48"
+            height="48"
+            (error)="logoFailed.set(true)"
+          />
+        } @else {
+          <span class="brand-mark" aria-hidden="true">{{ config.brandInitials }}</span>
+        }
+        <span class="brand-title">{{ 'platform-title' | translate }}</span>
+      </div></ng-template
+    >
+    <ng-template #center>
+      @if (!config.sidebar) {
+        <nav class="flex gap-2 flex-wrap" [attr.aria-label]="'navigation' | translate">
+          <a [routerLink]="config.homeRoute" routerLinkActive="active" class="nav-link">{{
+            'home-title' | translate
+          }}</a>
+          <a [routerLink]="config.newRoute" routerLinkActive="active" class="nav-link">{{
+            'new-title' | translate
+          }}</a>
+        </nav>
+      }
+    </ng-template>
+    <ng-template #end>
+      @if (!config.sidebarLanguage) {
+        <app-language-switcher />
+      }
+    </ng-template>
+  </p-toolbar>
+</header>
+<div class="app-body">
+  @if (config.sidebar && menuOpen()) {
+    <aside class="p-3 flex flex-column gap-3">
+      <nav [attr.aria-label]="'navigation' | translate" class="flex flex-column gap-2">
+        <a [routerLink]="config.homeRoute" routerLinkActive="active" class="nav-link"
+          ><i class="pi pi-home mr-2" aria-hidden="true"></i>{{ 'home-title' | translate }}</a
+        >
+        <a [routerLink]="config.newRoute" routerLinkActive="active" class="nav-link"
+          ><i class="pi pi-plus mr-2" aria-hidden="true"></i>{{ 'new-title' | translate }}</a
+        >
+      </nav>
+      @if (config.sidebarLanguage) {
+        <div class="mt-auto pt-4"><app-language-switcher /></div>
+      }
+    </aside>
+  }
+  <main id="main-content" tabindex="-1"><router-outlet /></main>
+</div>
+<footer class="px-4 py-3 text-sm">
+  Bernie Aarón Rivas Méndez · U20241F109
+  @if (logoUrl) {
+    <a href="https://logo.dev" class="ml-3">Logos provided by Logo.dev</a>
+  }
+</footer>

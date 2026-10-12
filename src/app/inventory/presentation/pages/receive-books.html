@@ -1,0 +1,100 @@
+<section class="form-panel" aria-labelledby="form-title">
+  <h1 id="form-title">{{ 'new-title' | translate }}</h1>
+  <p class="subtitle">{{ 'new-subtitle' | translate }}</p>
+  <app-feedback [busy]="store.busy()" [error]="store.error()" (retry)="store.load()" />
+  <p-card
+    ><form [formGroup]="form" (ngSubmit)="submit()" [attr.aria-busy]="store.saving()">
+      <fieldset class="border-none p-0 m-0" [disabled]="store.saving() || store.busy()">
+        <div class="field">
+          <label for="specialty">{{ 'specialty' | translate }}</label
+          ><p-select
+            [ariaLabel]="'specialty' | translate" inputId="specialty"
+            formControlName="specialty"
+            [options]="store.bookstores.stores()"
+            optionLabel="specialty"
+            optionValue="specialty"
+            (onChange)="changeSpecialty()"
+            [placeholder]="'select-option' | translate"
+          >
+            <ng-template #item let-item>{{
+              'specialty-' + item.specialty.replace('_', '-') | translate
+            }}</ng-template
+            ><ng-template #selectedItem let-item>{{
+              'specialty-' + item.specialty.replace('_', '-') | translate
+            }}</ng-template></p-select
+          >
+        </div>
+        <app-feedback
+          [busy]="store.catalog.busy()"
+          [error]="store.catalog.error()"
+          (retry)="changeSpecialty()"
+        />
+        <div class="field">
+          <label for="book">{{ 'book' | translate }}</label
+          ><p-select
+            [ariaLabel]="'book' | translate" inputId="book"
+            formControlName="bookKey"
+            [options]="store.catalog.books()"
+            optionLabel="title"
+            optionValue="key"
+            [filter]="true"
+            filterBy="title,authorName"
+            [emptyMessage]="'no-results' | translate"
+            [emptyFilterMessage]="'no-results' | translate"
+            [placeholder]="'select-option' | translate"
+          />
+        </div>
+        @for (book of store.catalog.books(); track book.key) {
+          @if (book.key === form.controls.bookKey.value) {
+            <p>
+              {{ 'author' | translate }}:
+              {{
+                book.authorName === 'Unknown Author'
+                  ? ('unknown-author' | translate)
+                  : book.authorName
+              }}
+            </p>
+          }
+        }
+        <div class="field">
+          <label for="copies">{{ 'copies' | translate }}</label
+          ><p-inputnumber
+            inputId="copies"
+            formControlName="copies"
+            [useGrouping]="false"
+            [min]="1"
+            [max]="maxCopies()"
+            [maxFractionDigits]="0"
+            ariaDescribedBy="copies-help"
+          />
+          <span id="copies-help" class="help">{{
+            'copies-limit' | translate: { max: maxCopies() }
+          }}</span>
+          @if (form.controls.copies.touched && form.controls.copies.invalid) {
+            <small role="alert">{{ 'copies-invalid' | translate }}</small>
+          }
+        </div>
+      </fieldset>
+      <div class="flex gap-2">
+        <p-button
+          type="submit"
+          [ariaLabel]="'receive' | translate" [label]="'receive' | translate"
+          icon="pi pi-check"
+          [loading]="store.saving()"
+          [disabled]="
+            form.invalid ||
+            store.busy() ||
+            store.catalog.busy() ||
+            store.saving() ||
+            !!store.catalog.error()
+          "
+        />
+        <p-button
+          [ariaLabel]="'cancel' | translate" [label]="'cancel' | translate"
+          severity="secondary"
+          routerLink="/bookstores/overview"
+          [disabled]="store.saving()"
+        />
+      </div></form
+  ></p-card>
+</section>

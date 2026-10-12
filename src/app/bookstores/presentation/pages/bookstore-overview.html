@@ -1,0 +1,17 @@
+<section aria-labelledby="overview-title">
+  <h1 id="overview-title">{{ 'home-title' | translate }}</h1>
+  <p class="subtitle">{{ 'home-subtitle' | translate }}</p>
+  <h2>{{ 'section-title' | translate }}</h2>
+  <app-feedback [busy]="store.busy()" [error]="store.error()" (retry)="store.load()" />
+  @if (!store.busy() && !store.error()) {
+    <div class="grid">
+      @for (bookstore of store.bookstores.stores(); track bookstore.id) {
+        <div class="col-12 md:col-6">
+          <app-bookstore-summary [store]="bookstore" [stocks]="store.stocks()" />
+        </div>
+      } @empty {
+        <p>{{ 'empty' | translate }}</p>
+      }
+    </div>
+  }
+</section>

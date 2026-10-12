@@ -1,0 +1,21 @@
+<p-card [header]="store().name">
+  @for (book of summary().books; track book.bookKey) {
+    <div class="summary-row">
+      <span>{{ book.bookTitle }}</span
+      ><strong>{{ language.number(book.copies) }} {{ 'copies' | translate }}</strong>
+    </div>
+  } @empty {
+    <p>{{ 'empty' | translate }}</p>
+  }
+  <ng-template #footer
+    ><div class="flex gap-2 flex-wrap">
+      <div class="metric">
+        {{ 'available-titles' | translate }}<strong>{{ summary().availableTitles }}</strong>
+      </div>
+      <div class="metric">
+        {{ 'replenishment-required' | translate
+        }}<strong>{{ summary().replenishmentRequired }}</strong>
+      </div>
+    </div></ng-template
+  >
+</p-card>

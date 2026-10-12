@@ -1,0 +1,70 @@
+html {
+  font-family: Inter, 'Segoe UI', Arial, sans-serif;
+  color: #172b3a;
+  background: #f5f7fa;
+}
+body {
+  margin: 0;
+  min-width: 320px;
+}
+* {
+  box-sizing: border-box;
+}
+h1 {
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  margin: 0 0 0.6rem;
+  letter-spacing: -0.03em;
+}
+h2 {
+  font-size: 1.35rem;
+}
+.subtitle {
+  color: #526574;
+  margin-bottom: 2rem;
+}
+.form-panel {
+  max-width: 760px;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+.field label {
+  font-weight: 600;
+}
+.help {
+  color: #526574;
+  font-size: 0.9rem;
+}
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid #e6eaf0;
+}
+.metric {
+  flex: 1;
+  padding: 0.6rem;
+  border-radius: 8px;
+  background: #f4f6f8;
+}
+.metric strong {
+  display: block;
+  font-size: 1.35rem;
+}
+.p-card {
+  height: 100%;
+}
+.p-card-title {
+  font-size: 1.2rem;
+}
+.p-select {
+  width: 100%;
+}
+:focus-visible {
+  outline: 3px solid var(--p-primary-500);
+  outline-offset: 3px;
+}

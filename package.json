@@ -1,0 +1,42 @@
+{
+  "name": "ea7750u20241f109",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "tsx --test tests/*.test.ts",
+    "api": "json-server --watch server/db.json --port 3000"
+  },
+  "private": true,
+  "packageManager": "npm@11.17.0",
+  "dependencies": {
+    "@angular/common": "22.2.2",
+    "@angular/compiler": "22.2.2",
+    "@angular/core": "22.2.2",
+    "@angular/forms": "22.2.2",
+    "@angular/platform-browser": "22.2.2",
+    "@angular/router": "22.2.2",
+    "rxjs": "7.8.2",
+    "tslib": "2.8.1",
+    "@angular/cdk": "22.2.2",
+    "primeng": "22.1.2",
+    "@primeuix/themes": "3.0.1",
+    "primeflex": "4.0.0",
+    "primeicons": "8.0.2",
+    "@ngx-translate/core": "18.0.0",
+    "@ngx-translate/http-loader": "18.0.0"
+  },
+  "devDependencies": {
+    "@angular/build": "22.2.2",
+    "@angular/cli": "22.2.2",
+    "@angular/compiler-cli": "22.2.2",
+    "typescript": "6.0.2",
+    "json-server": "0.17.4",
+    "tsx": "4.20.6"
+  },
+  "engines": {
+    "node": "^22.22.3 || ^24.15.0 || >=26.0.0"
+  }
+}
